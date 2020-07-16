@@ -1,7 +1,6 @@
 package net.fabricmc.fabric.api.entity.v1.entity;
 
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.world.World;
@@ -9,13 +8,6 @@ import net.minecraft.world.World;
 public class AbstractTamableEntity extends TameableEntity {
 	protected AbstractTamableEntity(EntityType<? extends TameableEntity> entityType, World world) {
 		super(entityType, world);
-	}
-
-	/*
-	 * Override me! Not having these could make big problems!
-	 */
-	public static DefaultAttributeContainer createAnimalDefaultAttributes() {
-		return DefaultAttributeContainer.builder().build();
 	}
 
 	@Override

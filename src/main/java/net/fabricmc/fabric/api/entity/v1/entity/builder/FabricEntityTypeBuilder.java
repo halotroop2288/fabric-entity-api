@@ -22,6 +22,7 @@ public class FabricEntityTypeBuilder<T extends Entity> extends net.fabricmc.fabr
 
 	/**
 	 * Creates a spawn egg to be registered during {@link FabricEntityTypeBuilder#build()}.
+	 * Note: This should not be used for non-living entities!
 	 *
 	 * @param colorA   the primary color of the spawn egg
 	 * @param colorB   the secondary color of the spawn egg

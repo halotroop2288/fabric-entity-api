@@ -12,6 +12,10 @@ public abstract class AbstractProjectileEntity extends ProjectileEntity {
 	}
 
 	@Override
+	protected void initDataTracker() {
+	}
+
+	@Override
 	public Packet<?> createSpawnPacket() {
 		return new EntitySpawnS2CPacket();
 	}

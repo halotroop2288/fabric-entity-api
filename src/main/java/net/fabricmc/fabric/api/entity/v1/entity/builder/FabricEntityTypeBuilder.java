@@ -28,15 +28,15 @@ public class FabricEntityTypeBuilder<T extends Entity> extends net.fabricmc.fabr
 		return this;
 	}
 
-	public FabricEntityTypeBuilder<T> register() {
-		EntityType<T> entityType = Registry.register(Registry.ENTITY_TYPE, this.id, this.build());
+	public EntityType<T> build() {
+		EntityType<T> entityType = Registry.register(Registry.ENTITY_TYPE, this.id, super.build());
 
 		if (generateEgg) {
 			egg = Registry.register(Registry.ITEM, new Identifier(id.getNamespace(), id.getPath() + "_egg"),
 					new SpawnEggItem(entityType, this.eggColorA, this.eggColorB, eggSettings));
 		}
 
-		return this;
+		return entityType;
 	}
 
 	public SpawnEggItem getEgg() {

@@ -12,7 +12,7 @@ public class FabricEntityTypeBuilder<T extends Entity> extends net.fabricmc.fabr
 	private final Identifier id;
 	private SpawnEggItem egg;
 	private boolean generateEgg;
-	private int eggColorA, eggColorB;
+	private int eggColorA = 0x000000, eggColorB = 0xFFFFFF;
 	private Item.Settings eggSettings;
 
 	public FabricEntityTypeBuilder(Identifier id, SpawnGroup spawnGroup, EntityType.EntityFactory<T> function) {
@@ -20,11 +20,18 @@ public class FabricEntityTypeBuilder<T extends Entity> extends net.fabricmc.fabr
 		this.id = id;
 	}
 
-	public FabricEntityTypeBuilder<T> egg(int colorA, int colorB, Item.Settings eggSettings) {
+	/**
+	 * Creates a spawn egg to be registered during {@link FabricEntityTypeBuilder#build()}.
+	 *
+	 * @param colorA   the primary color of the spawn egg
+	 * @param colorB   the secondary color of the spawn egg
+	 * @param settings the settings for the spawn egg item
+	 */
+	public FabricEntityTypeBuilder<T> egg(int colorA, int colorB, Item.Settings settings) {
+		this.eggSettings = settings;
 		this.generateEgg = true;
 		this.eggColorA = colorA;
 		this.eggColorB = colorB;
-		this.eggSettings = eggSettings;
 		return this;
 	}
 

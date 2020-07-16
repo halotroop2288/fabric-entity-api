@@ -1,6 +1,7 @@
 plugins {
 	id 'fabric-loom' version '0.4-SNAPSHOT'
 	id 'maven-publish'
+	id 'checkstyle'
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -10,17 +11,48 @@ archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
+repositories {
+	maven {
+		name = "Hexception"
+		url = "https://repo.hexeption.dev/repository/hex-mods/"
+	}
+	maven {
+		name = "JitPack"
+		url = "https://jitpack.io"
+	}
+}
 dependencies {
-	//to change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-
-	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
-	// You may need to force-disable transitiveness on them.
+	// Debug helpers
+	modRuntime "io.github.prospector:modmenu:${project.modmenu_version}"
+	modRuntime "uk.co.hexeption:DevWorld_1.16:${project.devworld_version}"
+
+	// Runtime Optimization
+	modRuntime ("com.github.SuperCoder7979:databreaker:ca25638") {
+		exclude module : "fabric-loader"
+	}
+	modRuntime ("com.github.jellysquid3:phosphor-fabric:0749029") {
+		exclude module : "fabric-loader"
+	}
+	modRuntime ("com.github.jellysquid3:lithium-fabric:6e33b68") {
+		exclude module : "fabric-loader"
+	}
+	modRuntime ("com.github.jellysquid3:sodium-fabric:885222a") {
+		exclude module : "fabric-loader"
+	}
+}
+
+minecraft {
+	accessWidener = file("src/main/resources/entityapi.accesswidener")
+}
+
+checkstyle {
+	configFile = rootProject.file("checkstyle.xml")
+	toolVersion = '8.31'
 }
 
 processResources {
@@ -71,7 +103,6 @@ publishing {
 
 	// select the repositories you want to publish to
 	repositories {
-		// uncomment to publish to the local maven
-		// mavenLocal()
+		mavenLocal()
 	}
 }

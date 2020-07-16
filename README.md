@@ -1,9 +1,29 @@
 # Fabric Example Mod
 
 ## Setup
+Add this to your build.gradle:
 
-For setup instructions please see the [fabric wiki page](https://fabricmc.net/wiki/tutorial:setup) that relates to the IDE that you are using.
+You'll need [JitPack](https://www.jitpack.io).
+```groovy
+repositories {
+	maven {
+		name = "JitPack"
+		url = "https://jitpack.io"
+	}
+}
+```
+
+Put this in your dependencies (Underneath any non-JitPack dependencies!)
+```groovy
+    modImplementation "com.github.halotroop2288:fabric-entity-api:${project.fabric_entity_api_version}"
+```
+
+Put this somewhere inside your gradle.properties, followed by the latest version number:
+![latest](https://img.shields.io/github/v/release/halotroop2288/fabric-entity-api?label=latest&sort=semver)
+```properties
+fabric_entity_api_version = 
+```
 
 ## License
 
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+This library is available under the Apache license. Feel free to use it in your own projects.
